@@ -7,10 +7,13 @@
 -   顯示全部餐廳
 -   顯示個別餐聽
 -   透過餐廳名稱、餐廳類別，搜尋特定餐廳
+-   新增餐廳資料
+-   編輯餐廳資料
+-   刪除餐廳資料
 
 ## Screen
 
-<img src="./public/Snipaste_2022-06-19_12-53-28.png" width="100%" />
+<img src="./public/Snipaste_2022-07-10_22-42-08.png" width="100%" />
 
 ## Get started
 
@@ -35,6 +38,8 @@ git clone https://github.com/DannyChouYs/restaurant_list.git
 -   VScode - 開發環境
 -   Express.js - 應用程式架構
 -   Express-handlebars - 模板引擎
+-   Mongoose
+-   Body-Parser
 -   nodemon - 自動化 reload
 -   bootstrap5 - 優化界面
 
