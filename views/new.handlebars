@@ -1,0 +1,12 @@
+<div class='container-sm'>
+    <!-- Content here -->
+    <form action='/restaurants' method='POST'>
+        {{#each columns}}
+            <div class='mb-3'>
+                <label for='{{this}}' class='form-label'>{{this}}</label>
+                <input type='text' class='form-control' id='{{this}}' name='{{this}}' />
+            </div>
+        {{/each}}
+        <button type='submit' class='btn btn-primary'>Create</button>
+    </form>
+</div>
