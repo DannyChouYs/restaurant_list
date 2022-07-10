@@ -55,10 +55,12 @@
                         </div>
                     </a>
                 </div>
-                <div class="crud-button">
-                    <a href="/restaurants/{{this._id}}/edit">Edit</a>
-                    <a href="/restaurants/{{this._id}}">Detail</a>
-                    <button>Delete</button>
+                <div class='crud-button'>
+                    <a href='/restaurants/{{this._id}}/edit'>Edit</a>
+                    <a href='/restaurants/{{this._id}}'>Detail</a>
+                    <form action='./restaurants/{{this._id}}/delete' method='POST' style='display: inline;'>
+                        <button type='submit'>delete</button>
+                    </form>
                 </div>
             </div>
         {{/each}}

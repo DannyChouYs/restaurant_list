@@ -22,7 +22,7 @@ db.once('open', () => {
 });
 
 // load json
-const restaurantList = require('./restaurant.json');
+// const restaurantList = require('./restaurant.json');
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
@@ -81,6 +81,13 @@ app.post('/restaurants/:id/edit', (req, res) => {
 });
 
 // 刪除一家餐廳
+app.post('/restaurants/:id/delete', (req, res) => {
+    const id = req.params.id;
+    return Restaurant.findById(id)
+        .then((restaurant) => restaurant.remove())
+        .then(() => res.redirect('/'))
+        .catch((error) => console.log(error));
+});
 
 // show
 app.get('/restaurants/:id', (req, res) => {
@@ -97,13 +104,18 @@ app.get('/restaurants/:id', (req, res) => {
 // search
 app.get('/search', (req, res) => {
     const keyword = req.query.keyword;
-    const restaurants = restaurantList.results.filter((item) => {
-        return (
-            item.name.toLowerCase().includes(keyword.toLowerCase()) ||
-            item.category.toLowerCase().includes(keyword.toLowerCase())
-        );
-    });
-    res.render('index', { restaurants: restaurants, keyword: keyword });
+    Restaurant.find()
+        .lean()
+        .then((restaurantItems) => {
+            const restaurants = restaurantItems.filter((item) => {
+                return (
+                    item.name.toLowerCase().includes(keyword.toLowerCase()) ||
+                    item.category.toLowerCase().includes(keyword.toLowerCase())
+                );
+            });
+            res.render('index', { restaurants, keyword });
+        })
+        .catch((error) => console.error(error)); // 錯誤處理
 });
 
 app.listen(port, () => {
