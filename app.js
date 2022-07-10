@@ -47,13 +47,38 @@ app.get('/restaurants/new', (req, res) => {
 
 // Create
 app.post('/restaurants', (req, res) => {
-    const { name, name_en, category, image, location, phone, google_map, description }= req.body; // 從 req.body 拿出表單裡的資料
+    const { name, name_en, category, image, location, phone, google_map, description } = req.body; // 從 req.body 拿出表單裡的資料
     return Restaurant.create({ name, name_en, category, image, location, phone, google_map, description }) // 存入資料庫
         .then(() => res.redirect('/')) // 新增完成後導回首頁
         .catch((error) => console.log(error));
 });
 
-// 修改餐廳資訊
+// 修改餐廳資訊頁面
+app.get('/restaurants/:id/edit', (req, res) => {
+    const id = req.params.id;
+    return Restaurant.findById(id)
+        .lean()
+        .then((restaurant) => {
+            res.render('edit', { restaurant, id });
+        })
+        .catch((error) => console.log(error));
+});
+
+// 更新餐廳資訊
+app.post('/restaurants/:id/edit', (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+    return Restaurant.findById(id)
+        .then((restaurant) => {
+            const columns = ['name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'description'];
+            for (let i = 0; i < columns.length; i++) {
+                restaurant[columns[i]] = data[columns[i]];
+            }
+            return restaurant.save();
+        })
+        .then(() => res.redirect(`/restaurants/${id}`))
+        .catch((error) => console.log(error));
+});
 
 // 刪除一家餐廳
 

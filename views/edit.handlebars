@@ -1,0 +1,24 @@
+<div class='container-sm'>
+    <!-- Content here -->
+    <form action='/restaurants/{{id}}/edit' method='POST'>
+        {{#each restaurant}}
+            {{#if @first}}
+                <div class='mb-3' style="display: none;">
+                    <label for='{{@key}}' class='form-label'>{{@key}}</label>
+                    <input type='text' class='form-control' id='{{@key}}' name='{{@key}}' value='{{this}}' disabled />
+                </div>
+            {{else if @last}}
+                <div class='mb-3' style="display: none;">
+                    <label for='{{@key}}' class='form-label'>{{@key}}</label>
+                    <input type='text' class='form-control' id='{{@key}}' name='{{@key}}' value='{{this}}' disabled />
+                </div>
+            {{else}}
+                <div class='mb-3'>
+                    <label for='{{@key}}' class='form-label'>{{@key}}</label>
+                    <input type='text' class='form-control' id='{{@key}}' name='{{@key}}' value='{{this}}' />
+                </div>
+            {{/if}}
+        {{/each}}
+        <button type='submit' class='btn btn-primary'>Edit</button>
+    </form>
+</div>
