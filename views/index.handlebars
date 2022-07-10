@@ -55,9 +55,9 @@
                         </div>
                     </a>
                 </div>
-                <div class='crud-button'>
-                    <a href='/restaurants/{{this._id}}/edit'>Edit</a>
-                    <a href='/restaurants/{{this._id}}'>Detail</a>
+                <div class='crud-button' style='display: flex; justify-content: flex-end '>
+                    <a href='/restaurants/{{this._id}}/edit' style='margin-right: 5px;'>Edit</a>
+                    <a href='/restaurants/{{this._id}}' style='margin-right: 5px;'>Detail</a>
                     <form action='./restaurants/{{this._id}}/delete' method='POST' style='display: inline;'>
                         <button type='submit'>delete</button>
                     </form>
