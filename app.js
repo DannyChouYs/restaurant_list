@@ -39,9 +39,15 @@ app.get('/', (req, res) => {
 });
 
 // show
-app.get('/restaurants/:restaurant_id', (req, res) => {
-    const restaurant = restaurantList.results.find((item) => item.id.toString() === req.params.restaurant_id);
-    res.render('show', { restaurant: restaurant });
+app.get('/restaurants/:id', (req, res) => {
+    // 模板的this._id，_id等同id，因為/restaurants/:id的路由":id"。
+    const id = req.params.id;
+    return Restaurant.findById(id)
+        .lean()
+        .then((restaurant) => {
+            res.render('show', { restaurant });
+        })
+        .catch((error) => console.error(error));
 });
 
 // search
