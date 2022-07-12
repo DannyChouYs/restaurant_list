@@ -40,8 +40,8 @@ app.get('/', (req, res) => {
 });
 
 // 新增一家餐廳
+const columns = ['name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'description'];
 app.get('/restaurants/new', (req, res) => {
-    const columns = ['name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'description'];
     return res.render('new', { columns });
 });
 
@@ -70,7 +70,6 @@ app.post('/restaurants/:id/edit', (req, res) => {
     const data = req.body;
     return Restaurant.findById(id)
         .then((restaurant) => {
-            const columns = ['name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'description'];
             for (let i = 0; i < columns.length; i++) {
                 restaurant[columns[i]] = data[columns[i]];
             }
